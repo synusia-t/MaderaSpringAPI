@@ -54,13 +54,19 @@ public class MaisonController {
 
     @GetMapping("/maisons")
     public @ResponseBody
-    Iterable<Maison> getAllUsers() {
+    Iterable<Maison> getAllMaisons() {
         return maisonRepository.findAll();
     }
 
     @GetMapping("/maison/{id}")
     public @ResponseBody
-    Optional<Maison> getUser(@PathVariable int id) {
+    Optional<Maison> getMaison(@PathVariable int id) {
         return  maisonRepository.findById(id);
+    }
+
+    @DeleteMapping("/maison/{id}")
+    public String deleteMaison(@PathVariable int id) {
+        maisonRepository.delete(maisonRepository.findById(id).get());
+        return  "maison :"+id+" deleted";
     }
 }
