@@ -1,6 +1,6 @@
 package com;
 
-import com.model.UserEntity;
+import com.model.User;
 import com.model.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,13 +20,13 @@ public class UserController {
     private UserRepository userRepository;
 
     @PostMapping("/user")
-    public ResponseEntity<UserEntity> addNewUser (@RequestParam String firstName,
-                                                  @RequestParam String lastName,
-                                                  @RequestParam String email,
-                                                  @RequestParam String password
+    public ResponseEntity<User> addNewUser (@RequestParam String firstName,
+                                            @RequestParam String lastName,
+                                            @RequestParam String email,
+                                            @RequestParam String password
     ) {
 
-        UserEntity user = new UserEntity();
+        User user = new User();
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setEmail(email);
@@ -42,12 +42,12 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public @ResponseBody Iterable<UserEntity> getAllUsers() {
+    public @ResponseBody Iterable<User> getAllUsers() {
         return userRepository.findAll();
     }
 
     @GetMapping("/user/{id}")
-    public @ResponseBody Optional<UserEntity> getUser(@PathVariable int id) {
+    public @ResponseBody Optional<User> getUser(@PathVariable int id) {
         return  userRepository.findById(id);
     }
 
