@@ -51,5 +51,10 @@ public class UserController {
         return  userRepository.findById(id);
     }
 
+    @DeleteMapping("/user/{id}")
+    public String deleteuser(@PathVariable int id) {
+        userRepository.delete(userRepository.findById(id).get());
+        return  "user :"+id+" deleted";
+    }
 
 }
